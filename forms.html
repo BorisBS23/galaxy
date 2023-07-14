@@ -1,0 +1,105 @@
+<html>
+<head>
+    <title>Galaxy Community</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="banner">
+        <div class="navbar">
+            <img src="logo.png" class="logo">
+            <ul>
+                <li><a href="index.html">НАЧАЛО</a></li>
+                <li><a href="shop.html">МАГАЗИН</a></li>
+                <li><a href="builder.html">BUILDER</a></li>
+                <li><a href="contact us.html">ПИШЕТЕ НИ</a></li>
+                <li><a href="vote.html">ГЛАСУВАЙ</a></li>
+            </ul>
+        </div>
+        <div class="formslabel">
+            <h1>GALAXY COMMUNITY</h1>
+        </div>
+        <form onsubmit="submitForm(event)">
+            <div class="fname">
+                <h2>1.Вашият Дискорд (Пример: ! VankoKN05#5000)</h2>
+                <input type="text" id="name" name="name" value=""><br>
+                <h2>2.От къде сте?</h2>
+                <input type="text" id="place" name="place" value=""><br>
+                <h2>3.Как се казвате?(Две имена)</h2>
+                <input type="text" id="names" name="names" value=""><br>
+                <h2>4.На колко години сте?(Само искрен отговор! Няма значение от годините)</h2>
+                <input type="text" id="age" name="age" value=""><br>
+                <h2>5.Колко време бихте отделяли на ден в сървъра?</h2>
+                <select name="time" id="time">
+                    <option value="2-3">2-3 часа</option>
+                    <option value="3-4">3-4 часа</option>
+                    <option value="4-5">4-5 часа</option>
+                    <option value="5-6">5-6 часа</option>
+                </select>
+                <h2>6.Какво действие ще предприемете ако, има крадец в сървъра?</h2>
+                <input type="text" id="rober" name="rober" value=""><br>
+                <h2>7.Какво ще направите, ако видите случайно, или някой Ви каже че има XRAY-ър?</h2>
+                <input type="text" id="xray" name="xray" value=""><br>
+                <h2>8.Какво ще направите, ако видите играч да слага TNT из целият сървър но вие нямате права за да направите нещо?(Без ще кажа на Owner и всякакви такива)</h2>
+                <input type="text" id="tnt" name="tnt" value=""><br>
+                <h2>9.Какво ще направите ако хванете играч да се възползва от бъг на сървъра?</h2>
+                <input type="text" id="bug" name="bug" value=""><br>
+                <div class="fname">
+                    <button type="submit"><span></span>Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        function submitForm(event) {
+          event.preventDefault(); // Prevent form submission
+      
+          // Get form data
+          const form = document.querySelector('form');
+          const name = form.elements.name.value;
+          const place = form.elements.place.value;
+          const names = form.elements.names.value;
+          const age = form.elements.age.value;
+          const time = form.elements.time.value;
+          const rober = form.elements.rober.value;
+          const xray = form.elements.xray.value;
+          const tnt = form.elements.tnt.value;
+          const bug = form.elements.bug.value;
+      
+          const formData = {
+            name,
+            place,
+            names,
+            age,
+            time,
+            rober,
+            xray,
+            tnt,
+            bug
+          };
+      
+          // Send form data to the server
+          fetch('/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          })
+            .then(response => {
+              if (response.ok) {
+                console.log('Form submitted successfully.');
+                alert('Form submitted successfully.');
+                form.reset(); // Clear the form fields
+              } else {
+                console.error('Error submitting form.');
+                alert('Error submitting form. Please try again later.');
+              }
+            })
+            .catch(error => {
+              console.error('Error submitting form:', error);
+              alert('Error submitting form. Please try again later.');
+            });
+        }
+      </script>
+</body>
+</html>

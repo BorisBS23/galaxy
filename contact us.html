@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Contact Us</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var form = document.getElementById('contactForm');
+      var popup = document.getElementById('popup');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Display popup message
+        popup.style.display = 'block';
+
+        // Reset form fields
+        form.reset();
+
+        // Hide popup message after 3 seconds
+        setTimeout(function() {
+          popup.style.display = 'none';
+        }, 3000);
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <form id="contactForm">
+      <h1>Contact Us Form</h1>
+      <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+      <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+      <input type="text" id="discord" name="discord" placeholder="Discord" required>
+      <h4>Type Your Message Here...</h4>
+      <textarea name="message" required></textarea>
+      <input type="submit" value="Send" id="button">
+    </form>
+  </div>
+  
+  <!-- Popup message -->
+  <div id="popup" class="popup" style="display: none;">
+    <p>Form submitted successfully!</p>
+  </div>
+</body>
+</html>
